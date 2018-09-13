@@ -1,3 +1,3 @@
 package com.nuweather.data.base
 
-class Entity
+open class Entity

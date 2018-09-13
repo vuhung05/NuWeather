@@ -28,6 +28,15 @@ android {
     }
 
     flavorDimensions "tier"
+
+    libraryVariants.all { variant ->
+
+        def BASE_URL = "https://api.openweathermap.org/data/2.5/"
+        def API_KEY = "9f48f121f6b65193a1b60f0181a84355"
+
+        variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
+        variant.buildConfigField "String", "API_KEY", "\"${API_KEY}\""
+    }
 }
 
 dependencies {

@@ -11,7 +11,7 @@ apply plugin: 'androidx.navigation.safeargs'
 android {
     compileSdkVersion build_versions.target_sdk
     defaultConfig {
-        applicationId "com.example.cleanarchitecture"
+        applicationId "com.nuweather.NuWeather"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
@@ -81,7 +81,6 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
-//    kapt deps.binding.compiler
 
     testImplementation deps.junit
     testImplementation deps.mock_web_server
