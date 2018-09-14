@@ -21,7 +21,7 @@
         <EditText
             android:id="@+id/queryEdit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="47dp"
             android:hint="@string/please_type_your_city"
             android:inputType="text"
             android:text="@={viewModel.query}"
@@ -33,12 +33,14 @@
             android:id="@+id/searchButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@color/colorPrimary"
             android:onClick="@{() -> viewModel.searchClick()}"
             android:text="@string/search"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/queryEdit" />
 
 
         <TextView
@@ -98,8 +100,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
-            app:layout_constraintEnd_toEndOf="parent"
             android:text="@{String.valueOf(viewModel.currentWeatherItem.pressure)}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/temp"
             app:layout_constraintTop_toBottomOf="@+id/temp" />
 
