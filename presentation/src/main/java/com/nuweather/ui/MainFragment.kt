@@ -21,8 +21,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override val viewModel: MainViewModel
         get() = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 
-    private var bindingComponent = FragmentDataBindingComponent(this)
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
