@@ -19,14 +19,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.nuweather.R
 import com.nuweather.util.autoCleared
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import javax.inject.Inject
 
 const val PERMISSION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 1
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
+abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : DaggerFragment(),
         EasyPermissions.PermissionCallbacks {
 
     abstract val bindingVariable: Int
@@ -71,11 +71,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
         transit?.let { if (it != -1) transaction.setTransition(it) }
         transaction.commit()
-    }
-
-    override fun onAttach(context: Context?) {
-        performDependencyInjection()
-        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,9 +125,5 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     @AfterPermissionGranted(PERMISSION_REQUEST_CODE)
     open fun permissionAccepted() {
 
-    }
-
-    private fun performDependencyInjection() {
-        AndroidSupportInjection.inject(this)
     }
 }

@@ -21,7 +21,7 @@
         <EditText
             android:id="@+id/queryEdit"
             android:layout_width="0dp"
-            android:layout_height="47dp"
+            android:layout_height="wrap_content"
             android:hint="@string/please_type_your_city"
             android:inputType="text"
             android:text="@={viewModel.query}"

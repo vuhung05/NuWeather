@@ -1,20 +1,22 @@
-package com.example.cleanarchitecture.di.component
+package com.nuweather.di.component
 
 import android.app.Application
-import com.nuweather.MainApplication
+import com.nuweather.App
 import com.nuweather.di.builder.AppModule
 import com.nuweather.di.builder.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(
-        AndroidInjectionModule::class,
-        AppModule::class,
-        MainActivityModule::class))
-interface AppComponent {
+@Component(modules = [
+    AndroidInjectionModule::class,
+    AppModule::class,
+    MainActivityModule::class
+])
+interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -23,5 +25,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(mainApplication: MainApplication)
+    override fun inject(app: App)
 }
