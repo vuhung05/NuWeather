@@ -3,7 +3,6 @@ package com.nuweather.model
 import com.nuweather.base.ItemMapper
 import com.nuweather.base.ModelItem
 import com.nuweather.domain.model.CurrentWeather
-import com.nuweather.domain.model.Model
 import com.nuweather.domain.model.Sys
 import com.nuweather.domain.model.Wind
 import javax.inject.Inject

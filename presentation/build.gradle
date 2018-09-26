@@ -77,8 +77,10 @@ dependencies {
     implementation deps.rx_android
     implementation deps.rxjava2
 
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
+    implementation deps.koin.android
+    implementation deps.koin.viewmodel
+    implementation deps.koin.scope
+
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 

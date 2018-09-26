@@ -1,10 +1,20 @@
 package com.nuweather
 
-import com.nuweather.di.component.DaggerAppComponent
-import dagger.android.DaggerApplication
+import android.app.Application
+import com.nuweather.data.di.networkModule
+import com.nuweather.data.di.repositoryModule
+import com.nuweather.di.appModule
+import com.nuweather.di.viewModelModule
+import org.koin.android.ext.android.startKoin
 
-class App : DaggerApplication() {
-    override fun applicationInjector() = DaggerAppComponent.builder()
-            .application(this)
-            .build()
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        startKoin(this, listOf(
+                appModule,
+                networkModule,
+                viewModelModule,
+                repositoryModule
+        ))
+    }
 }

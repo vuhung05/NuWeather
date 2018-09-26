@@ -1,7 +1,6 @@
 package com.nuweather.base
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
@@ -19,14 +18,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.nuweather.R
 import com.nuweather.util.autoCleared
-import dagger.android.support.DaggerFragment
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
-import javax.inject.Inject
 
 const val PERMISSION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 1
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : DaggerFragment(),
+abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
         EasyPermissions.PermissionCallbacks {
 
     abstract val bindingVariable: Int
@@ -37,9 +34,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : DaggerFrag
     abstract val layoutId: Int
 
     var viewDataBinding by autoCleared<T>()
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     fun hideKeyboard() {
         val view = activity!!.currentFocus

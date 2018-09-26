@@ -1,12 +1,11 @@
 package com.nuweather.ui
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.nuweather.BR
 import com.nuweather.R
 import com.nuweather.base.BaseFragment
-import com.nuweather.binding.FragmentDataBindingComponent
 import com.nuweather.databinding.FragmentMainBinding
+import org.koin.android.ext.android.inject
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     companion object {
@@ -18,8 +17,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override val layoutId: Int
         get() = R.layout.fragment_main
 
-    override val viewModel: MainViewModel
-        get() = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+    override val viewModel: MainViewModel by inject()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

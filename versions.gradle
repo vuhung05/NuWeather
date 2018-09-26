@@ -30,6 +30,7 @@ versions.work = "1.0.0-alpha02"
 versions.navigation = "1.0.0-alpha01"
 versions.easy_permission = "1.2.0"
 versions.data_binding = "3.1.3"
+versions.koin = "1.0.1"
 def deps = [:]
 
 def support = [:]
@@ -153,6 +154,13 @@ def modules = [:]
 modules.domain = project(':domain')
 modules.data = project(':data')
 deps.modules = modules
+
+def koin = [:]
+koin.core = "org.koin:koin-core:$versions.koin"
+koin.android = "org.koin:koin-android:$versions.koin"
+koin.viewmodel = "org.koin:koin-android-viewmodel:$versions.koin"
+koin.scope = "org.koin:koin-android-scope:$versions.koin"
+deps.koin = koin
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()

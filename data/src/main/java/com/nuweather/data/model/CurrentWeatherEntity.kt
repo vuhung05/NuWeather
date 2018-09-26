@@ -5,7 +5,6 @@ import com.nuweather.data.base.EntityMapper
 import com.nuweather.domain.model.CurrentWeather
 import com.nuweather.domain.model.Sys
 import com.nuweather.domain.model.Wind
-import javax.inject.Inject
 
 data class CurrentWeatherEntity(
         val id: Int,
@@ -36,7 +35,7 @@ data class SysEntity(
         val sunset: Int
 ) : Entity()
 
-class CurrentWeatherMapper @Inject constructor(
+class CurrentWeatherMapper constructor(
         private val windMapper: WindMapper,
         private val sysMapper: SysMapper
 ) : EntityMapper<CurrentWeather, CurrentWeatherEntity> {
@@ -70,7 +69,7 @@ class CurrentWeatherMapper @Inject constructor(
 
 }
 
-class WindMapper @Inject constructor() : EntityMapper<Wind, WindEntity> {
+class WindMapper : EntityMapper<Wind, WindEntity> {
     override fun mapToDomain(entity: WindEntity) = Wind(
             speed = entity.speed,
             deg = entity.deg
@@ -82,7 +81,7 @@ class WindMapper @Inject constructor() : EntityMapper<Wind, WindEntity> {
     )
 }
 
-class SysMapper @Inject constructor() : EntityMapper<Sys, SysEntity> {
+class SysMapper : EntityMapper<Sys, SysEntity> {
     override fun mapToDomain(entity: SysEntity) = Sys(
             type = entity.type,
             id = entity.id,

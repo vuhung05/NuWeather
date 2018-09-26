@@ -5,9 +5,8 @@ import com.nuweather.data.remote.api.WeatherApi
 import com.nuweather.domain.model.CurrentWeather
 import com.nuweather.domain.repository.CurrentWeatherRepository
 import io.reactivex.Single
-import javax.inject.Inject
 
-class CurrentWeatherRepositoryImpl @Inject constructor(
+class CurrentWeatherRepositoryImpl constructor(
         private val weatherApi: WeatherApi,
         private val currentWeatherMapper: CurrentWeatherMapper
 ) : CurrentWeatherRepository {

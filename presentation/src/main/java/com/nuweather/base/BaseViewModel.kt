@@ -5,7 +5,7 @@ import com.nuweather.domain.usecase.UseCase
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel constructor(
-        vararg val useCases: UseCase<*, *>?
+        private vararg val useCases: UseCase<*, *>?
 ) : ViewModel() {
 
     var compositeDisposable: CompositeDisposable = CompositeDisposable()

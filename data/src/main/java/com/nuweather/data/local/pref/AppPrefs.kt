@@ -1,12 +1,12 @@
 package com.nuweather.data.local.pref
 
 import android.content.Context
-import javax.inject.Inject
+import android.content.SharedPreferences
 
-class AppPrefs @Inject constructor(
-        mContext: Context
+class AppPrefs constructor(
+        context: Context
 ) : PrefHelper {
-    var sharedPreferences = mContext.getSharedPreferences(mContext.packageName, Context.MODE_PRIVATE)
+    var sharedPreferences: SharedPreferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
 
     companion object {
         private const val FIRST_RUN = "first_run";

@@ -7,41 +7,27 @@ import com.nuweather.data.CurrentWeatherRepositoryImpl
 import com.nuweather.data.local.db.AppDatabase
 import com.nuweather.data.local.pref.AppPrefs
 import com.nuweather.data.local.pref.PrefHelper
+import com.nuweather.data.model.CurrentWeatherMapper
+import com.nuweather.data.model.SysMapper
+import com.nuweather.data.model.WindMapper
 import com.nuweather.domain.repository.CurrentWeatherRepository
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import org.koin.dsl.module.module
 
-@Module
-class RepositoryModule {
-    @Provides
-    @DatabaseInfo
-    fun providerDatabaseName(): String {
-        return Constants.DATABASE_NAME
-    }
+val repositoryModule = module {
+    single { createDatabaseName() }
+    single { createAppDatabase(get(), get()) }
+    single<PrefHelper> { AppPrefs(get()) }
+    single<CurrentWeatherRepository> { CurrentWeatherRepositoryImpl(get(), get()) }
+    factory { CurrentWeatherMapper(get(), get()) }
+    factory { WindMapper() }
+    factory { SysMapper() }
+}
 
-    @Provides
-    @Singleton
-    fun provideAppDatabase(@DatabaseInfo dbName: String, context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, dbName).fallbackToDestructiveMigration()
-                .build()
-    }
+fun createDatabaseName(): String {
+    return Constants.DATABASE_NAME
+}
 
-    @Provides
-    @Singleton
-    fun providePrefHelper(appPrefs: AppPrefs): PrefHelper {
-        return appPrefs
-    }
-
-    @Provides
-    @Singleton
-    fun providerAppPrefs(context: Context): AppPrefs {
-        return AppPrefs(context)
-    }
-
-    @Provides
-    @Singleton
-    fun providerCurrentWeatherRepository(repository: CurrentWeatherRepositoryImpl): CurrentWeatherRepository {
-        return repository
-    }
+fun createAppDatabase(dbName: String, context: Context): AppDatabase {
+    return Room.databaseBuilder(context, AppDatabase::class.java, dbName).fallbackToDestructiveMigration()
+            .build()
 }
