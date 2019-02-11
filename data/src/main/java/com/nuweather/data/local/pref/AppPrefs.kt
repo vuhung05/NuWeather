@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class AppPrefs constructor(
-        context: Context
+    context: Context
 ) : PrefHelper {
     var sharedPreferences: SharedPreferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
 

@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import java.util.concurrent.Executors
 
 abstract class BaseRecyclerAdapter<T>(
-        callBack: DiffUtil.ItemCallback<T>
+    callBack: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, BaseViewHolder<ViewDataBinding>>(
-        AsyncDifferConfig.Builder<T>(callBack)
-                .setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
-                .build()
+    AsyncDifferConfig.Builder<T>(callBack)
+        .setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
+        .build()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding> {

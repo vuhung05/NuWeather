@@ -10,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
-
     single { createHttpClient() }
     single { createRetrofit(get()) }
     single { createUsersApi(get()) }
@@ -25,11 +24,11 @@ fun createHttpClient(): OkHttpClient {
 }
 
 fun createRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build()
+    .baseUrl(BASE_URL)
+    .client(okHttpClient)
+    .addConverterFactory(GsonConverterFactory.create())
+    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    .build()
 
 fun createUsersApi(retrofit: Retrofit): WeatherApi = retrofit.create(WeatherApi::class.java)
 

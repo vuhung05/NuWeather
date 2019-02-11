@@ -1,6 +1,5 @@
 package com.nuweather.ui
 
-import android.os.Bundle
 import com.nuweather.BR
 import com.nuweather.R
 import com.nuweather.base.BaseFragment
@@ -19,7 +18,4 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override val viewModel: MainViewModel by inject()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 }

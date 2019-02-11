@@ -24,7 +24,7 @@ import pub.devrel.easypermissions.EasyPermissions
 const val PERMISSION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 1
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
-        EasyPermissions.PermissionCallbacks {
+    EasyPermissions.PermissionCallbacks {
 
     abstract val bindingVariable: Int
 
@@ -60,7 +60,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     fun replaceFragment(fragment: Fragment, TAG: String?, addToBackStack: Boolean? = false, transit: Int? = -1) {
         val transaction = activity!!.supportFragmentManager!!.beginTransaction()
-                .replace(R.id.container, fragment)
+            .replace(R.id.container, fragment)
 
         addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
         transit?.let { if (it != -1) transaction.setTransition(it) }
@@ -83,7 +83,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         viewDataBinding.apply {
             setVariable(bindingVariable, viewModel)
             executePendingBindings()
-            setLifecycleOwner(this@BaseFragment)
+            lifecycleOwner = this@BaseFragment
         }
     }
 

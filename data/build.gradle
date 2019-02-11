@@ -41,12 +41,9 @@ android {
 
 dependencies {
     implementation deps.kotlin.stdlib
-
     implementation deps.modules.domain
-
     implementation deps.rx_android
     implementation deps.rxjava2
-
     implementation deps.room.runtime
     implementation deps.room.rxjava2
     implementation deps.lifecycle.runtime
@@ -55,18 +52,16 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.retrofit.adapter
-
     implementation deps.koin.core
-
-
     implementation deps.timber
+
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 
     testImplementation deps.junit
     testImplementation deps.mock_web_server
-
     testImplementation deps.mockito.core
+
     androidTestImplementation(deps.espresso.core, {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs', module: 'jsr305'

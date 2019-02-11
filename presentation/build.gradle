@@ -61,22 +61,14 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.glide.runtime
-
     implementation deps.modules.data
     implementation deps.modules.domain
-
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
-
     implementation deps.permissions.easy_permission
-
     implementation deps.constraint_layout
     implementation deps.kotlin.stdlib
     implementation deps.timber
     implementation deps.rx_android
     implementation deps.rxjava2
-
     implementation deps.koin.android
     implementation deps.koin.viewmodel
     implementation deps.koin.scope
@@ -92,6 +84,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-core-utils'
     })
     testImplementation deps.mockito.core
+
     androidTestImplementation deps.navigation.testing_ktx
     androidTestImplementation deps.support.app_compat
     androidTestImplementation deps.support.recyclerview

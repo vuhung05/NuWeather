@@ -8,9 +8,9 @@ import com.nuweather.model.CurrentWeatherMapper
 import com.nuweather.rx.SchedulerProvider
 
 class MainViewModel constructor(
-        private val useCase: GetCurrentWeatherCase,
-        private val schedulerProvider: SchedulerProvider,
-        private val currentWeatherMapper: CurrentWeatherMapper
+    private val useCase: GetCurrentWeatherCase,
+    private val schedulerProvider: SchedulerProvider,
+    private val currentWeatherMapper: CurrentWeatherMapper
 ) : BaseViewModel() {
 
     val currentWeatherItem = MutableLiveData<CurrentWeatherItem>()
@@ -24,14 +24,14 @@ class MainViewModel constructor(
         query.value?.let {
             if (it.isNotBlank()) {
                 compositeDisposable.add(useCase.createObservable(GetCurrentWeatherCase.Params(it))
-                        .subscribeOn(schedulerProvider.io())
-                        .observeOn(schedulerProvider.ui())
-                        .map { currentWeatherMapper.mapToPresentation(it) }
-                        .subscribe({
-                            currentWeatherItem.value = it
-                        }, {
+                    .subscribeOn(schedulerProvider.io())
+                    .observeOn(schedulerProvider.ui())
+                    .map { currentWeather -> currentWeatherMapper.mapToPresentation(currentWeather) }
+                    .subscribe({ item ->
+                        currentWeatherItem.value = item
+                    }, {
 
-                        })
+                    })
                 )
             }
         }
