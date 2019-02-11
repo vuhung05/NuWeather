@@ -9,7 +9,7 @@ class AppPrefs constructor(
     var sharedPreferences: SharedPreferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
 
     companion object {
-        private const val FIRST_RUN = "first_run";
+        private const val FIRST_RUN = "first_run"
     }
 
     override fun isFirstRun(): Boolean {
