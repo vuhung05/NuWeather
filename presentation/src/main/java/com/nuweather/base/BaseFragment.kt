@@ -1,22 +1,30 @@
 package com.nuweather.base
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.graphics.Color
 import android.os.Bundle
 import android.os.IBinder
 import android.support.annotation.LayoutRes
 import android.support.annotation.Size
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.nuweather.R
+import com.nuweather.data.remote.error.ApiException
+import com.nuweather.extention.setBackgroundColor
+import com.nuweather.extention.setTextColor
+import com.nuweather.util.DialogUtils
 import com.nuweather.util.autoCleared
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -25,6 +33,8 @@ const val PERMISSION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 1
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     EasyPermissions.PermissionCallbacks {
+
+    private var alertDialog: AlertDialog? = null
 
     abstract val bindingVariable: Int
 
@@ -85,6 +95,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             executePendingBindings()
             lifecycleOwner = this@BaseFragment
         }
+        initView()
+        handleEvent()
+        observe()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -116,8 +129,74 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         }
     }
 
+    private fun showLoading() {
+        hideLoading()
+        alertDialog = DialogUtils.showLoadingDialog(activity)
+    }
+
+    private fun hideLoading() {
+        if (alertDialog?.isShowing == true) {
+            alertDialog?.cancel()
+        }
+    }
+
+    private fun handleError(apiException: ApiException) {
+        val message: String = when {
+            apiException.isNetworkError() -> {
+                getString(R.string.no_internet_connection)
+            }
+            apiException.isServerError() -> {
+                apiException.getServerMessage()
+                    ?: getString(R.string.internal_server_error)
+            }
+            else -> {
+                getString(R.string.no_error_identified)
+            }
+        }
+        showSnackBar(message)
+    }
+
+    private fun showSnackBar(message: String, action: String? = null,
+                             actionListener: View.OnClickListener? = null,
+                             duration: Int = Snackbar.LENGTH_SHORT) {
+        activity?.let {
+            val snackBar = Snackbar.make(it.findViewById(android.R.id.content), message, duration)
+                .setBackgroundColor(ContextCompat.getColor(it, R.color.colorBlackAlpha80))
+                .setTextColor(Color.WHITE)
+            action?.let { snackBar.setAction(it, actionListener) }
+            snackBar.show()
+        }
+    }
+
     @AfterPermissionGranted(PERMISSION_REQUEST_CODE)
     open fun permissionAccepted() {
 
+    }
+
+    open fun initView() {
+
+    }
+
+    open fun handleEvent() {
+
+    }
+
+    open fun observe() {
+        viewModel.isLoading.observe(this@BaseFragment, Observer {
+            it?.let { isLoading ->
+                if (isLoading) {
+                    hideKeyboard()
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
+        })
+
+        viewModel.error.observe(this@BaseFragment, Observer {
+            it?.let { apiException ->
+                handleError(apiException)
+            }
+        })
     }
 }

@@ -8,12 +8,14 @@ import com.nuweather.domain.model.Wind
 
 data class CurrentWeatherEntity(
     val id: Long,
+    val city: String,
     val description: String,
-    val temp: Double,
-    val temp_min: Double,
-    val temp_max: Double,
+    val temp: Int,
+    val temp_min: Int,
+    val temp_max: Int,
     val pressure: Double,
     val visibility: Double,
+    val humidity: Double,
     val clouds: Double,
     val wind: WindEntity,
     val sys: SysEntity,
@@ -41,12 +43,14 @@ class CurrentWeatherMapper constructor(
 ) : EntityMapper<CurrentWeather, CurrentWeatherEntity> {
     override fun mapToDomain(entity: CurrentWeatherEntity) = CurrentWeather(
         id = entity.id,
+        city = entity.city,
         description = entity.description,
         temp = entity.temp,
         tempMin = entity.temp_min,
         tempMax = entity.temp_max,
         pressure = entity.pressure,
         visibility = entity.visibility,
+        humidity = entity.humidity,
         clouds = entity.clouds,
         wind = windMapper.mapToDomain(entity.wind),
         sys = sysMapper.mapToDomain(entity.sys),
@@ -55,12 +59,14 @@ class CurrentWeatherMapper constructor(
 
     override fun mapToEntity(model: CurrentWeather) = CurrentWeatherEntity(
         id = model.id,
+        city = model.city,
         description = model.description,
         temp = model.temp,
         temp_min = model.tempMin,
         temp_max = model.tempMax,
         pressure = model.pressure,
         visibility = model.visibility,
+        humidity = model.humidity,
         clouds = model.clouds,
         wind = windMapper.mapToEntity(model.wind),
         sys = sysMapper.mapToEntity(model.sys),

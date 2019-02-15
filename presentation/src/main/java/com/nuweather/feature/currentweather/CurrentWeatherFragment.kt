@@ -1,5 +1,7 @@
 package com.nuweather.feature.currentweather
 
+import android.os.Bundle
+import android.view.View
 import com.nuweather.BR
 import com.nuweather.R
 import com.nuweather.base.BaseFragment
@@ -17,5 +19,11 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding, Curre
         get() = R.layout.fragment_current_weather
 
     override val viewModel: CurrentWeatherViewModel by inject()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.query.value = "Ho Chi Minh City"
+        viewModel.getCurrentWeather()
+    }
 
 }
