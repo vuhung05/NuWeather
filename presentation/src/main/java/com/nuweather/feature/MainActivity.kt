@@ -1,8 +1,9 @@
-package com.nuweather.ui
+package com.nuweather.feature
 
 import android.os.Bundle
 import com.nuweather.R
 import com.nuweather.base.BaseActivity
+import com.nuweather.feature.currentweather.CurrentWeatherFragment
 
 class MainActivity : BaseActivity() {
 
@@ -12,7 +13,7 @@ class MainActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, CurrentWeatherFragment.newInstance())
                 .commitNow()
 
         }

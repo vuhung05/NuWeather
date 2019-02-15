@@ -1,4 +1,4 @@
-package com.nuweather.ui
+package com.nuweather.feature.currentweather
 
 import android.arch.lifecycle.MutableLiveData
 import com.nuweather.base.BaseViewModel
@@ -6,8 +6,9 @@ import com.nuweather.domain.usecase.GetCurrentWeatherCase
 import com.nuweather.model.CurrentWeatherItem
 import com.nuweather.model.CurrentWeatherMapper
 import com.nuweather.rx.SchedulerProvider
+import io.reactivex.rxkotlin.subscribeBy
 
-class MainViewModel constructor(
+class CurrentWeatherViewModel constructor(
     private val useCase: GetCurrentWeatherCase,
     private val schedulerProvider: SchedulerProvider,
     private val currentWeatherMapper: CurrentWeatherMapper
@@ -21,17 +22,16 @@ class MainViewModel constructor(
     }
 
     private fun getCurrentWeather() {
-        query.value?.let {
-            if (it.isNotBlank()) {
-                compositeDisposable.add(useCase.createObservable(GetCurrentWeatherCase.Params(it))
+        query.value?.let { query ->
+            if (query.isNotBlank()) {
+                compositeDisposable.add(useCase.createObservable(GetCurrentWeatherCase.Params(query))
                     .subscribeOn(schedulerProvider.io())
                     .observeOn(schedulerProvider.ui())
                     .map { currentWeather -> currentWeatherMapper.mapToPresentation(currentWeather) }
-                    .subscribe({ item ->
-                        currentWeatherItem.value = item
-                    }, {
-
-                    })
+                    .subscribeBy(
+                        onSuccess = { currentWeatherItem.value = it },
+                        onError = {}
+                    )
                 )
             }
         }

@@ -43,7 +43,7 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.modules.domain
     implementation deps.rx_android
-    implementation deps.rxjava2
+    implementation deps.rx_kotlin
     implementation deps.room.runtime
     implementation deps.room.rxjava2
     implementation deps.lifecycle.runtime

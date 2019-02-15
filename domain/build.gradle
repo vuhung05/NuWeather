@@ -5,7 +5,7 @@ apply plugin: 'kotlin'
 dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.rx_android
-    implementation deps.rxjava2
+    implementation deps.rx_kotlin
     implementation deps.koin.core
 
     testImplementation deps.mockito.core

@@ -68,7 +68,7 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.timber
     implementation deps.rx_android
-    implementation deps.rxjava2
+    implementation deps.rx_kotlin
     implementation deps.koin.android
     implementation deps.koin.viewmodel
     implementation deps.koin.scope
