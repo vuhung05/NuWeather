@@ -2,6 +2,7 @@ package com.nuweather.data.di
 
 import com.nuweather.data.BuildConfig.BASE_URL
 import com.nuweather.data.remote.api.WeatherApi
+import com.nuweather.data.remote.middleware.RxErrorHandlingCallAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
@@ -26,6 +27,7 @@ fun createHttpClient(): OkHttpClient {
 fun createRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .client(okHttpClient)
+    .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
     .addConverterFactory(GsonConverterFactory.create())
     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     .build()
