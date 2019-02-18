@@ -7,32 +7,32 @@ import com.nuweather.domain.model.Sys
 import com.nuweather.domain.model.Wind
 
 data class CurrentWeatherItem(
-    val id: Int,
+    val id: Long,
     val description: String,
     val temp: Double,
     val tempMin: Double,
     val tempMax: Double,
-    val pressure: Int,
-    val visibility: Int,
-    val clouds: Int,
+    val pressure: Double,
+    val visibility: Double,
+    val clouds: Double,
     val wind: WindItem,
     val sys: SysItem,
-    val dt: Int
+    val dt: Long
 ) : ModelItem()
 
 data class WindItem(
     val speed: Double,
-    val deg: Int
+    val deg: Double
 ) : ModelItem()
 
 
 data class SysItem(
     val type: Int,
-    val id: Int,
+    val id: Long,
     val message: Double,
     val country: String,
-    val sunrise: Int,
-    val sunset: Int
+    val sunrise: Long,
+    val sunset: Long
 ) : ModelItem()
 
 class CurrentWeatherMapper constructor(
