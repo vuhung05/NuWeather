@@ -54,6 +54,7 @@ dependencies {
     implementation deps.retrofit.adapter
     implementation deps.koin.core
     implementation deps.timber
+    implementation deps.okhttp3_logging
 
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
