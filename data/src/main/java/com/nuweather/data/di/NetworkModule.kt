@@ -9,6 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import okhttp3.logging.HttpLoggingInterceptor
+
 
 val networkModule = module {
     single { createHttpClient() }
@@ -17,10 +19,13 @@ val networkModule = module {
 }
 
 fun createHttpClient(): OkHttpClient {
+    val loggingInterceptor = HttpLoggingInterceptor()
+    loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     val clientBuilder = OkHttpClient.Builder()
     clientBuilder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
     clientBuilder.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
     clientBuilder.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+    clientBuilder.addInterceptor(loggingInterceptor)
     return clientBuilder.build()
 }
 
