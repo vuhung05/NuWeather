@@ -23,12 +23,14 @@ data class CurrentWeatherResponse(
 
     fun mapToEntity() = CurrentWeatherEntity(
         id = weather[0].id,
+        city = "$name, ${sys.country}",
         description = weather[0].description,
-        temp = main.temp,
-        temp_min = main.tempMin,
-        temp_max = main.tempMax,
+        temp = (main.temp - 273).toInt(),
+        temp_min = (main.tempMin - 273).toInt(),
+        temp_max = (main.tempMax - 273).toInt(),
         pressure = main.pressure,
         visibility = visibility,
+        humidity = main.humidity,
         clouds = clouds.all,
         wind = WindEntity(wind.speed, wind.deg),
         sys = SysEntity(sys.type, sys.id, sys.message, sys.country, sys.sunrise, sys.sunset),
