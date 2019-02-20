@@ -1,8 +1,8 @@
 package com.nuweather.data.remote.response
 
 import com.google.gson.annotations.SerializedName
-import com.nuweather.data.model.CurrentWeatherEntity
 import com.nuweather.data.model.SysEntity
+import com.nuweather.data.model.WeatherEntity
 import com.nuweather.data.model.WindEntity
 
 
@@ -21,7 +21,7 @@ data class CurrentWeatherResponse(
     @SerializedName("cod") val cod: Int
 ) : BaseResponse() {
 
-    fun mapToEntity() = CurrentWeatherEntity(
+    fun mapToEntity() = WeatherEntity(
         id = weather[0].id,
         city = "$name, ${sys.country}",
         description = weather[0].description,

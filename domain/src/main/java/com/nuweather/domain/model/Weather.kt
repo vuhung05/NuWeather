@@ -1,6 +1,6 @@
 package com.nuweather.domain.model
 
-data class CurrentWeather(
+data class Weather(
     val id: Long,
     val city: String,
     val description: String,
@@ -14,19 +14,4 @@ data class CurrentWeather(
     val wind: Wind,
     val sys: Sys,
     val dt: Long
-) : Model()
-
-data class Wind(
-    val speed: Double,
-    val deg: Double
-) : Model()
-
-
-data class Sys(
-    val type: Int,
-    val id: Long,
-    val message: Double,
-    val country: String,
-    val sunrise: Long,
-    val sunset: Long
 ) : Model()

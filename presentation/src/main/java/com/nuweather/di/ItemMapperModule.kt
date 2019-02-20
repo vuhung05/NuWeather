@@ -1,12 +1,12 @@
 package com.nuweather.di
 
-import com.nuweather.model.CurrentWeatherMapper
-import com.nuweather.model.SysMapper
-import com.nuweather.model.WindMapper
+import com.nuweather.mapper.SysMapper
+import com.nuweather.mapper.WeatherMapper
+import com.nuweather.mapper.WindMapper
 import org.koin.dsl.module.module
 
 val itemMapperModule = module {
-    single { CurrentWeatherMapper(get(), get()) }
+    single { WeatherMapper(get(), get()) }
     single { WindMapper() }
     single { SysMapper() }
 }

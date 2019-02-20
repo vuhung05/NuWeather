@@ -4,12 +4,12 @@ import com.nuweather.data.BuildConfig.BASE_URL
 import com.nuweather.data.remote.api.WeatherApi
 import com.nuweather.data.remote.middleware.RxErrorHandlingCallAdapterFactory
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import okhttp3.logging.HttpLoggingInterceptor
 
 
 val networkModule = module {

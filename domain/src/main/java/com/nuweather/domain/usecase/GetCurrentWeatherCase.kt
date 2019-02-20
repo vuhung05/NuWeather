@@ -1,13 +1,13 @@
 package com.nuweather.domain.usecase
 
-import com.nuweather.domain.model.CurrentWeather
+import com.nuweather.domain.model.Weather
 import com.nuweather.domain.repository.WeatherRepository
 import io.reactivex.Single
 
 class GetCurrentWeatherCase constructor(
     private val currentWeatherRepository: WeatherRepository
-) : UseCase<GetCurrentWeatherCase.Params, Single<CurrentWeather>>() {
-    override fun createObservable(params: Params?): Single<CurrentWeather> {
+) : UseCase<GetCurrentWeatherCase.Params, Single<Weather>>() {
+    override fun createObservable(params: Params?): Single<Weather> {
         params?.let {
             return currentWeatherRepository.getCurrentWeather(it.query)
         }
