@@ -5,8 +5,8 @@ import com.nuweather.R
 import com.nuweather.base.BaseViewModel
 import com.nuweather.data.remote.error.ApiException
 import com.nuweather.domain.usecase.GetCurrentWeatherCase
-import com.nuweather.model.CurrentWeatherItem
-import com.nuweather.model.CurrentWeatherMapper
+import com.nuweather.mapper.WeatherMapper
+import com.nuweather.model.WeatherItem
 import com.nuweather.rx.SchedulerProvider
 import com.nuweather.util.PartOfDay
 import com.nuweather.util.getPartOfDay
@@ -15,10 +15,10 @@ import io.reactivex.rxkotlin.subscribeBy
 class CurrentWeatherViewModel constructor(
     private val useCase: GetCurrentWeatherCase,
     private val schedulerProvider: SchedulerProvider,
-    private val currentWeatherMapper: CurrentWeatherMapper
+    private val weatherMapper: WeatherMapper
 ) : BaseViewModel() {
 
-    val currentWeatherItem = MutableLiveData<CurrentWeatherItem>()
+    val currentWeatherItem = MutableLiveData<WeatherItem>()
     val weatherImage = MutableLiveData<Int>()
     val query = MutableLiveData<String>()
 
@@ -29,7 +29,7 @@ class CurrentWeatherViewModel constructor(
                 compositeDisposable.add(useCase.createObservable(GetCurrentWeatherCase.Params(query))
                     .subscribeOn(schedulerProvider.io())
                     .observeOn(schedulerProvider.ui())
-                    .map { currentWeather -> currentWeatherMapper.mapToPresentation(currentWeather) }
+                    .map { currentWeather -> weatherMapper.mapToPresentation(currentWeather) }
                     .subscribeBy(
                         onSuccess = {
                             disableLoading()
