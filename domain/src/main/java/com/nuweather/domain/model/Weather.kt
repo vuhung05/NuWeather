@@ -1,5 +1,7 @@
 package com.nuweather.domain.model
 
+import java.util.*
+
 data class Weather(
     val id: Long,
     val city: String,
@@ -13,5 +15,5 @@ data class Weather(
     val clouds: Int,
     val wind: Wind,
     val sys: Sys,
-    val dt: Long
+    val dt: Date
 ) : Model()

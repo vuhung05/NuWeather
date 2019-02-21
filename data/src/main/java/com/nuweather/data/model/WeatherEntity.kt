@@ -1,6 +1,7 @@
 package com.nuweather.data.model
 
 import com.nuweather.data.base.Entity
+import java.util.*
 
 data class WeatherEntity(
     val id: Long,
@@ -15,5 +16,5 @@ data class WeatherEntity(
     val clouds: Int,
     val wind: WindEntity,
     val sys: SysEntity,
-    val dt: Long
+    val dt: Date
 ) : Entity()
