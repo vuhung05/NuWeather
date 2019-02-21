@@ -14,7 +14,7 @@
     <string name="wind_value">%s m/s</string>
     <string name="humidity_value">%s %%</string>
     <string name="no_error_identified">No error identified</string>
-    <string name="no_internet_connection">Please check your internet connection and try again</string>
+    <string name="no_internet_connection">Please check your internet connection and try again!</string>
     <string name="internal_server_error">Internal Server Error</string>
     <string name="deg">°</string>
     <string name="deg_c">°C</string>

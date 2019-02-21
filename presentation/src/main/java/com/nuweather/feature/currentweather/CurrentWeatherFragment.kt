@@ -26,4 +26,8 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding, Curre
         viewModel.getCurrentWeather()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.setWeatherBackground()
+    }
 }
