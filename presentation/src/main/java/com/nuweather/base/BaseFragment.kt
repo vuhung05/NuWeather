@@ -29,8 +29,6 @@ import com.nuweather.util.autoCleared
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-const val PERMISSION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 1
-
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     EasyPermissions.PermissionCallbacks {
 
@@ -146,8 +144,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 getString(R.string.no_internet_connection)
             }
             apiException.isServerError() -> {
-                apiException.getServerMessage()
-                    ?: getString(R.string.internal_server_error)
+                apiException.getServerMessage() ?: getString(R.string.internal_server_error)
             }
             else -> {
                 getString(R.string.no_error_identified)
@@ -198,5 +195,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 handleError(apiException)
             }
         })
+    }
+
+    companion object {
+        const val PERMISSION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 1
     }
 }

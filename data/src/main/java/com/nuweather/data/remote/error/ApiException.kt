@@ -1,6 +1,6 @@
 package com.nuweather.data.remote.error
 
-import com.nuweather.data.remote.response.BaseErrorResponse
+import com.nuweather.data.remote.response.base.BaseErrorResponse
 import retrofit2.Response
 import java.io.IOException
 

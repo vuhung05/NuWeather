@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.nuweather.data.remote.error.ApiException
-import com.nuweather.data.remote.response.BaseErrorResponse
+import com.nuweather.data.remote.response.base.BaseErrorResponse
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call

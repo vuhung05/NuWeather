@@ -10,9 +10,9 @@ data class WeatherEntity(
     val temp_min: Int,
     val temp_max: Int,
     val pressure: Double,
-    val visibility: Double,
-    val humidity: Double,
-    val clouds: Double,
+    val visibility: Int?,
+    val humidity: Int,
+    val clouds: Int,
     val wind: WindEntity,
     val sys: SysEntity,
     val dt: Long
