@@ -14,7 +14,7 @@ val repositoryModule = module {
     single { createDatabaseName() }
     single { createAppDatabase(get(), get()) }
     single<PrefHelper> { AppPrefs(get()) }
-    single<WeatherRepository> { WeatherRepositoryImpl(get(), get()) }
+    single<WeatherRepository> { WeatherRepositoryImpl(get(), get(), get()) }
 }
 
 fun createDatabaseName(): String {

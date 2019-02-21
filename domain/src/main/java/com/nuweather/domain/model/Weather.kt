@@ -8,9 +8,9 @@ data class Weather(
     val tempMin: Int,
     val tempMax: Int,
     val pressure: Double,
-    val visibility: Double,
-    val humidity: Double,
-    val clouds: Double,
+    val visibility: Int?,
+    val humidity: Int,
+    val clouds: Int,
     val wind: Wind,
     val sys: Sys,
     val dt: Long

@@ -1,5 +1,7 @@
 package com.nuweather.feature.temperaturechart
 
+import android.os.Bundle
+import android.view.View
 import com.nuweather.BR
 import com.nuweather.R
 import com.nuweather.base.BaseFragment
@@ -19,4 +21,9 @@ class TemperatureChartFragment : BaseFragment<FragmentTemperatureChartBinding, T
         fun newInstance() = TemperatureChartFragment()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.query.value = "Ho Chi Minh City"
+        viewModel.getFiveDaysForecastCase()
+    }
 }
