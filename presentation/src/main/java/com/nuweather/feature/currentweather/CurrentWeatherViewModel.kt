@@ -83,7 +83,7 @@ class CurrentWeatherViewModel(
         weatherBackground.value = background
     }
 
-    fun getRefreshListener() = {
+    fun refresh() = {
         getCurrentWeather()
         getFiveDaysForecast()
     }

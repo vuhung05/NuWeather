@@ -58,21 +58,20 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     fun showKeyboard(editText: EditText?) {
         if (editText == null) return
 
-        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
     fun findFragment(TAG: String): Fragment? {
-        return activity!!.supportFragmentManager.findFragmentByTag(TAG)
+        return activity?.supportFragmentManager?.findFragmentByTag(TAG)
     }
 
     fun replaceFragment(fragment: Fragment, TAG: String?, addToBackStack: Boolean? = false, transit: Int? = -1) {
-        val transaction = activity!!.supportFragmentManager!!.beginTransaction()
-            .replace(R.id.container, fragment)
+        val transaction = activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
 
-        addToBackStack?.let { if (it) transaction.addToBackStack(TAG) }
-        transit?.let { if (it != -1) transaction.setTransition(it) }
-        transaction.commit()
+        addToBackStack?.let { if (it) transaction?.addToBackStack(TAG) }
+        transit?.let { if (it != -1) transaction?.setTransition(it) }
+        transaction?.commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
