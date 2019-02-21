@@ -4,27 +4,32 @@ import android.arch.lifecycle.MutableLiveData
 import com.nuweather.R
 import com.nuweather.base.BaseViewModel
 import com.nuweather.data.remote.error.ApiException
+import com.nuweather.domain.model.FiveDaysForecast
 import com.nuweather.domain.model.Weather
 import com.nuweather.domain.usecase.GetCurrentWeatherCase
+import com.nuweather.domain.usecase.GetFiveDaysForecastCase
 import com.nuweather.rx.SchedulerProvider
 import com.nuweather.util.PartOfDay
 import com.nuweather.util.getPartOfDay
 import io.reactivex.rxkotlin.subscribeBy
 
 class CurrentWeatherViewModel(
-    private val useCase: GetCurrentWeatherCase,
+    private val getCurrentWeatherCase: GetCurrentWeatherCase,
+    private val getFiveDaysForecastCase: GetFiveDaysForecastCase,
     private val schedulerProvider: SchedulerProvider
 ) : BaseViewModel() {
 
     val currentWeather = MutableLiveData<Weather>()
+    val fiveDaysForecast = MutableLiveData<FiveDaysForecast>()
     val weatherImage = MutableLiveData<Int>()
+    val weatherBackground = MutableLiveData<Int>()
     val query = MutableLiveData<String>()
 
     fun getCurrentWeather() {
         query.value?.let { query ->
             if (query.isNotBlank() && query.isNotEmpty()) {
                 enableLoading()
-                compositeDisposable.add(useCase.createObservable(GetCurrentWeatherCase.Params(query))
+                compositeDisposable.add(getCurrentWeatherCase.createObservable(GetCurrentWeatherCase.Params(query))
                     .subscribeOn(schedulerProvider.io())
                     .observeOn(schedulerProvider.ui())
                     .subscribeBy(
@@ -43,6 +48,44 @@ class CurrentWeatherViewModel(
                 )
             }
         }
+    }
+
+    fun getFiveDaysForecast() {
+        query.value?.let { query ->
+            if (query.isNotBlank() && query.isNotEmpty()) {
+                enableLoading()
+                compositeDisposable.add(getFiveDaysForecastCase.createObservable(GetFiveDaysForecastCase.Params(query))
+                    .subscribeOn(schedulerProvider.io())
+                    .observeOn(schedulerProvider.ui())
+                    .subscribeBy(
+                        onSuccess = {
+                            disableLoading()
+                            fiveDaysForecast.value = it
+                        },
+                        onError = {
+                            disableLoading()
+                            if (it is ApiException) {
+                                setError(it)
+                            }
+                        }
+                    )
+                )
+            }
+        }
+    }
+
+    fun setWeatherBackground() {
+        val background = when (getPartOfDay()) {
+            PartOfDay.MORNING -> R.drawable.bg_morning
+            PartOfDay.AFTERNOON -> R.drawable.bg_afternoon
+            else -> R.drawable.bg_night
+        }
+        weatherBackground.value = background
+    }
+
+    fun getRefreshListener() = {
+        getCurrentWeather()
+        getFiveDaysForecast()
     }
 
     private fun setWeatherImage(id: Long) {
