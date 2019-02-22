@@ -19,5 +19,7 @@
     <string name="deg">°</string>
     <string name="deg_c">°C</string>
     <string name="deg_f">°F</string>
+    <string name="value_deg_c">%s °C</string>
+    <string name="value_deg_f">%s °F</string>
     <string name="daily_forecast_16_days">Daily forecast for 16 days</string>
 </resources>

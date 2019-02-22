@@ -6,6 +6,7 @@ import com.nuweather.data.model.WeatherEntity
 import com.nuweather.data.model.WindEntity
 import com.nuweather.data.remote.response.base.BaseResponse
 import com.nuweather.data.remote.response.model.*
+import java.util.*
 
 
 data class WeatherResponse(
@@ -37,6 +38,8 @@ data class WeatherResponse(
         clouds = clouds.all,
         wind = WindEntity(wind.speed, wind.deg),
         sys = SysEntity(sys.type, sys.id, sys.message, sys.country, sys.sunrise, sys.sunset),
-        dt = dt
+        dt = Calendar.getInstance().apply {
+            time = Date(dt * 1000)
+        }
     )
 }

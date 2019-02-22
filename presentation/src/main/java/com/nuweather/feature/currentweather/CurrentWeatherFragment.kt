@@ -1,6 +1,7 @@
 package com.nuweather.feature.currentweather
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.nuweather.BR
 import com.nuweather.R
@@ -29,5 +30,12 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding, Curre
     override fun onResume() {
         super.onResume()
         viewModel.setWeatherBackground()
+    }
+
+    override fun initView() {
+        super.initView()
+        viewDataBinding.forecastList.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 }
